@@ -3,4 +3,8 @@ public struct BallparkStringUtility {
 
     public init() {
     }
+  
+  public func HelloThere() -> String {
+    "Hello To You"
+  }
 }
