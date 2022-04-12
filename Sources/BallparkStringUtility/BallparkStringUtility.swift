@@ -7,4 +7,7 @@ public struct BallparkStringUtility {
   public func HelloThere() -> String {
     "Hello To You"
   }
+  public func Greetings() -> String {
+    "How are you?"
+  }
 }
