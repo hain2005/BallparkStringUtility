@@ -18,7 +18,6 @@ jobs:
     - name: Run tests
       run: swift test -v
 
-jobs:
   create_release:
     name: Create Release
     runs-on: macos-latest
