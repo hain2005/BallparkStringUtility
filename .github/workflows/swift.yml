@@ -1,0 +1,42 @@
+name: Swift
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: swift build -v
+    - name: Run tests
+      run: swift test -v
+
+
+  create_release:
+    name: Create Release
+    runs-on: macos-latest
+    steps:
+
+      - uses: actions/checkout@v2
+      
+      - name: Create XCFramework
+        uses: philprime/swift-create-xcframework@v2.1.0
+
+      # Create a release
+      # Upload those artifacts to the release
+      
+      - name: Create BallparkStringUtility.xcframework.zip
+        run: |
+          mkdir BallparkStringUtility/Build/BallparkStringUtility.xcframework
+          mv ios/BallparkStringUtility/BallparkStringUtility.xcframework/* BallparkStringUtility/Build/BallparkStringUtility.xcframework
+          zip -r BallparkStringUtility.xcframework.zip BallparkStringUtility/Build
+          rm -rf ios/BallparkStringUtility/BallparkStringUtility.xcframework
+      - name: Attach ZIP to latest release
+        run: ghr -t ${{ secrets.GITHUB_TOKEN }} -replace $(git describe --tags --abbrev=0) BallparkStringUtility.xcframework.zip
