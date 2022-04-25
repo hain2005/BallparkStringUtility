@@ -24,10 +24,10 @@ jobs:
     runs-on: macos-latest
     steps:
 
-      - uses: actions/checkout@v2.1.0
+      - uses: actions/checkout@v2
       
       - name: Create XCFramework
-        uses: philprime/swift-create-xcframework@v2.1.0
+        uses: philprime/swift-create-xcframework@v2
 
       # Create a release
       # Upload those artifacts to the release
